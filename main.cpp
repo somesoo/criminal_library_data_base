@@ -144,10 +144,13 @@ void wczytaj_z_pliku(vector<akta> &archiwum_krym){
 }
 void wyswietl_liste_akt(const vector<akta> &typ){
     int i=0;
+    if(typ.size()>0)
     for(auto &j: typ){
             i++;
             cout<<"Pozycja na liscie: "<<i<<", numer akt: "<<j.numer_akt<<endl;
     }
+    else
+        cout<<"Brak zgromadzonych akt.\n";
     }
 void dodaj_sprawe(vector<akta> &archiwum_krym){
     akta nowa;
@@ -192,6 +195,7 @@ void wpisywanie_do_char_array(char tab[], int si){
 }
 void wyswietlanie_char_array(char tab[], int a){
     int i=0;
+    if(tab[i]>=65 && tab[i]<=127)
     while(tab[i] !='\0'){
         cout<<tab[i];
         i++;
@@ -257,7 +261,9 @@ void data_input(s_data_kalendarzowa&  data){
         }
 }
 void data_output(const s_data_kalendarzowa&  data){
-    cout<<data.dzien<<"/"<<data.miesiac<<"/"<<data.rok<<endl;
+    if(data.dzien!=0)
+        cout<<data.dzien<<"/"<<data.miesiac<<"/"<<data.rok;
+    cout<<endl;
 }
 int wybierz_akta(vector<akta> &arch){
     cout<<"Wybierz akta: \nDostepne akta: \n";
@@ -444,10 +450,7 @@ void wyrarzenia_regularne(const vector<akta> &archiwum_krym)
             cout<<"Znaleziono \""<<i.poszkodowany<<"\" sa to akta nr "<<num<<endl;
         else if(regex_match (i.swiadek,reg))
             cout<<"Znaleziono \""<<i.swiadek<<"\" sa to akta nr "<<num<<endl;
-        else
-            cout<<"Nie znaleziono.\n";
     }
-    
     else
     for(auto &i: archiwum_krym)
     {
@@ -462,8 +465,6 @@ void wyrarzenia_regularne(const vector<akta> &archiwum_krym)
             cout<<"Znaleziono \""<<i.poszkodowany<<"\" sa to akta nr "<<num<<endl;
         else if(regex_search (i.swiadek,reg))
             cout<<"Znaleziono \""<<i.swiadek<<"\" sa to akta nr "<<num<<endl;
-        else
-            cout<<"Nie znaleziono.\n";
     }
     return;
 }
