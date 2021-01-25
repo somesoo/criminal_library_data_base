@@ -57,7 +57,7 @@ int main(){
 void zapisz_do_pliku(vector<akta> &archiwum_krym){
     ofstream plik;
     char a;
-    cout<<"1. Nadpisz plik.\n2. Dopisz do pliku na jego koniec.\n3. Nie zapisuj.\nPodaj, jak chcesz zapisac dane: ";
+    cout<<"1. Nadpisz plik.\n2. Dopisz do pliku na jego koniec.\n3. Zapisz wszystkie dane nadpisujac plik.\n4. Zapisz wszystkie dane dopisujac do pliku.\n5. Nie zapisuj.\nPodaj, jak chcesz zapisac dane: ";
     cin>>a;
     switch (a) {
         case '1':
@@ -84,6 +84,32 @@ void zapisz_do_pliku(vector<akta> &archiwum_krym){
                 cout<<"Blad otwierania pliku.\n";
             break;
         case '3':
+            plik.open("tekstowy.txt", ios::out);
+            if(plik.is_open()){
+                cout<<"Plik zostal otwarty!\n";
+                akta nowe;
+                for(int i =0; i<archiwum_krym.size();i++){
+                    nowe=archiwum_krym.at(i);
+                    plik.write((const char*)&nowe, sizeof(nowe));
+                }
+                plik.close();
+            }
+            else
+                cout<<"Blad otwierania pliku.\n";
+                break;
+        case '4':
+            plik.open("tekstowy.txt", ios::out | ios::app);
+            if(plik.is_open()){
+                akta nowe;
+                for(int i =0; i<archiwum_krym.size();i++){
+                nowe=archiwum_krym.at(i);
+                plik.write((const char*)&nowe, sizeof(nowe));
+                }
+                plik.close();
+            }
+            else
+                cout<<"Blad otwierania pliku.\n";
+        case '5':
             cout<<"Nie wprowadzono zadnych zmian.\n";
             break;
         default:
