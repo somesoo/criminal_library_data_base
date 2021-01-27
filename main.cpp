@@ -299,7 +299,7 @@ void zmiana_danych(vector<akta> &arch){
     size_t a=wybierz_akta(arch);
     sprawa=&arch.at(a);
     wyswietl_element_struktury(*sprawa);
-    wczytaj_sprawe(*sprawa);
+    zmiana_danych2(*sprawa);
 }
 void zmiana_danych2(akta &sprawa){
     char a='a';
